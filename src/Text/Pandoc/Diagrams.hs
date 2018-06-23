@@ -6,7 +6,6 @@
 
 module Text.Pandoc.Diagrams where
 
-import           Control.Monad                   (when)
 import           Data.Char                       (toLower)
 import           Data.List                       (delete)
 import           Diagrams.Backend.Cairo
@@ -87,15 +86,15 @@ compileDiagram opts attrs src = do
 
                 & DB.snippets .~ [src]
                 & DB.imports  .~
-                  [ "Diagrams.TwoD.Types"      -- WHY IS THIS NECESSARY =(
-                  , "Diagrams.Core.Points"
-                      -- GHC 7.2 bug?  need  V (Point R2) = R2  (see #65)
-                  , "Diagrams.Backend.Cairo"
-                  , "Diagrams.Backend.Cairo.Internal"
-                  , "Graphics.SVGFonts"
+                  [ "Diagrams.Backend.Cairo"
                   , "Data.Typeable"
                   ]
-                & DB.pragmas .~ ["DeriveDataTypeable"]
+                & DB.pragmas .~ [ "DeriveDataTypeable"
+                                , "DeriveGeneric"
+                                , "GADTs"
+                                , "FlexibleContexts"
+                                , "StandaloneDeriving"
+                                ]
                 & DB.diaExpr .~ _expression opts
                 & DB.postProcess .~ (pad 1.1 . centerXY)
                 & DB.decideRegen .~
