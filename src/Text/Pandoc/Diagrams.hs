@@ -94,6 +94,7 @@ compileDiagram opts attrs src = do
                                 , "GADTs"
                                 , "FlexibleContexts"
                                 , "StandaloneDeriving"
+                                , "MultiParamTypeClasses"
                                 ]
                 & DB.diaExpr .~ _expression opts
                 & DB.postProcess .~ (pad 1.1 . centerXY)
