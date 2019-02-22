@@ -43,14 +43,14 @@ data Opts = Opts {
 
 data Echo = Above | Below
 
-insertDiagrams :: Opts -> Block -> IO [Block]
+insertDiagrams :: Opts -> Block -> IO Block
 insertDiagrams opts@(Opts _ _ _ absolutePath) (CodeBlock (ident, classes, attrs) code)
     | "diagram-haskell" `elem` classes = do
       i <- img
-      return $ case echo of
+      return $ Div nullAttr $ case echo of
         Above -> [bl', i]
         Below -> [i, bl']
-    | "diagram" `elem` classes = (:[]) <$> img
+    | "diagram" `elem` classes = img
   where
     img = do
         d <- compileDiagram opts attrs code
@@ -59,7 +59,7 @@ insertDiagrams opts@(Opts _ _ _ absolutePath) (CodeBlock (ident, classes, attrs)
             Right imgName -> Plain [Image ("",[],[]) [] (if absolutePath then pathSeparator : imgName else imgName,"")] -- no alt text, no title
     bl' = CodeBlock (ident, "haskell":delete "diagram-haskell" classes, attrs) code
     echo = readEcho attrs
-insertDiagrams _ block = return [block]
+insertDiagrams _ block = return block
 
 -- Copied from https://github.com/diagrams/diagrams-doc/blob/master/doc/Xml2Html.hs
 -- With the CPP removed, thereby requiring Cairo
