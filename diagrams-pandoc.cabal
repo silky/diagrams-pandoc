@@ -22,7 +22,7 @@ Source-repository head
   location: http://github.com/diagrams/diagrams-pandoc.git
 
 library
-  build-depends:       base >= 4.6 && < 4.10,
+  build-depends:       base,
                        pandoc-types,
                        diagrams-lib,
                        linear,
@@ -41,7 +41,7 @@ executable diagrams-pandoc
   main-is:             src/Main.hs
   -- other-modules:
   -- other-extensions:
-  build-depends:       base >= 4.6 && < 4.10,
+  build-depends:       base,
                        pandoc-types,
                        diagrams-lib,
                        linear,
