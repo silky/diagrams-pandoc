@@ -2,7 +2,6 @@ module Main where
 
 import           Text.Pandoc.Diagrams
 
-import           Data.Semigroup ((<>))
 import           Options.Applicative
 import           Text.Pandoc.JSON
 

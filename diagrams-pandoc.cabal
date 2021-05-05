@@ -31,7 +31,8 @@ library
                        palette,
                        directory,
                        filepath,
-                       semigroups
+                       semigroups,
+                       text
   exposed-modules: Text.Pandoc.Diagrams
   default-language: Haskell2010
   hs-source-dirs: src
@@ -51,6 +52,7 @@ executable diagrams-pandoc
                        directory,
                        filepath,
                        diagrams-pandoc,
-                       optparse-applicative
+                       optparse-applicative,
+                       text
   -- hs-source-dirs:
   default-language:    Haskell2010
